@@ -1,3 +1,3 @@
 #Summary
 
-*[머리말](README.md)
+*[소개](README.md)
