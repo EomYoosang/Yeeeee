@@ -1,5 +1,4 @@
 # Table of contents
 
-* [Introduction](README.md)
-* [Nodejs](nodejs.md)
+* [소개](README.md)
 
