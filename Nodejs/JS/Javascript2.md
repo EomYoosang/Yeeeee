@@ -38,7 +38,7 @@ console.log(value);
 value = 2;
 console.log(value);
 ```
-위 코드 실행시 오류가 발생한다!
+위 코드 실행시 오류가 발생한다!   
 <img src="./const_error.png">
 ### Reference
 <https://learnjs.vlpt.us/>
