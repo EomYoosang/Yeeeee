@@ -59,7 +59,7 @@ cat.say();
 
 2. 해당 함수의 Prototype Object 생성 및 연결   
  -function Animal()을 생성하고 prototype 속성을 통해 Prototype Obejct에 접근합니다.   
- ```javascript
+```javascript
  function Animal(type, name, sound) {
   this.type = type;
   this.name = name;
@@ -75,14 +75,14 @@ Prototype Object는 일반적인 객체와 같으며 속성으로 **constructor*
 **__proto__** 는 Prototype Link입니다.
 
 위 코드 실행 시
-<center><img src = ./result.png></center>   
+<center><img src = ./result.png></center><br>
 Animal Prototype Object에 say()가 추가되었습니다.   
 
 이번엔 dog를 Animal함수를 통해 생성 후 dog.__proto__ 를 확인해보겠습니다.   
-<center><img src = ./result3.png></center>
+<center><img src = ./result3.png></center>   
 
 ### 마무리
-<center><img src="https://miro.medium.com/max/700/1*mwPfPuTeiQiGoPmcAXB-Kg.png"></center>
+<center><img src="https://miro.medium.com/max/700/1*mwPfPuTeiQiGoPmcAXB-Kg.png" width="></center><br>
 Prototype이 값을 재사용하는 것 뿐만 아니라 객체들이 프로토타입 체인으로 연결되어있음을 알아보았습니다.
 
 ### Reference
