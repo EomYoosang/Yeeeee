@@ -86,7 +86,7 @@ const dog = new Animal('개', '멍멍이', '멍멍');
 
 ```
 위에서 상속받은 Dog class의 객체 dog과 프로토타입을 통해 생성한 dog의 프로토타입 체인은 다음과 같이 동일합니다.<br>
-![prototype_chain](./prototype_chain.png)
+<img src="./prototype_chain.png" width="90%">
 
 ## Reference
 https://jeong-pro.tistory.com/120
