@@ -9,7 +9,7 @@ ES6 부터는 ```class``` 문법이 추가되어 객체 생성자를 더욱 깔�
 
 ## Constructor
 
-```
+```javascript
 class Animal {
   constructor(type, name, sound) {
     this.type = type;
@@ -20,7 +20,7 @@ class Animal {
 ```
 기존에 함수를 이용해 객체를 생성하였지만 Class에서는 ```constructor```을 이용해 객체를 생성합니다.
 ## Method
-```
+```javascript
 class Animal {
   constructor(type, name, sound) {
     this.type = type;
@@ -40,7 +40,8 @@ cat.say();
 ```
 함수 내부의 함수를 '메서드'라고 부른다. 이 경우 자동으로 prototype으로 등록됩니다.
 결과는 다음과 같습니다.
-```
+
+```javascript
 멍멍
 야옹
 ```

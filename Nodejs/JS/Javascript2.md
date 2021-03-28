@@ -63,21 +63,21 @@ console.log(value);
 -`*`: 곱셈
 -`/`: 나눗셈<br>이런 것도 가능!
 
-```
+```javascript
 ++a
 a++
 ```
 
 2.	대입 연산자`=`를 통해 값을 대입
 
-```
+```javascript
 let a = 1;
 a = a + 3;
 ```
 
 이런 것도 가능!
 
-```
+```javascript
 let a = 1;
 a += 3;
 a -= 3;
