@@ -262,6 +262,8 @@ __setTime(콜백, 0)은 사용하지 않도록 권장__
 
 ## module, exports, require
 
+#### module.exports vs exports
+
 모듈을 만들 때 `module.exports`가 아닌 exports 객체로 만들 수 있음
 
 __var.js__
@@ -271,9 +273,157 @@ exports.odd='홀수입니다'
 exports.even='짝수입니다'
 ```
 
-__exports 객체 사용시__
+<img src="https://thebook.io/img/080229/104.jpg" width="60%">
 
-객체만 대입 가능하므로 주의
+module.exports와 exports는 같은 객체를 참조함
+
+```javascript
+console.lgo(moduel.exports===exports) //true
+```
+
+__exports 객체 사용시 객체만 대입 가능하므로 주의__
 
 **exports 객체와 module.exports를 동시에 사용하지 않을 것**
 
+__최상위 스코프에 존재하는 this는 module.exports(또는 exports 객체)를 가리킴__
+
+__함수 선언문 내부의 this는 global 객체를 가리킴__
+
+#### require
+
+__require.js__
+
+```javascript
+console.log('require가 가장 위에 오지 않아도 됩니다.');
+
+module.exports = '저를 찾아보세요.';
+
+require('./var');
+
+console.log('require.cache입니다.');
+console.log(require.cache);
+console.log('require.main입니다.');
+console.log(require.main === module);	//true
+console.log(require.main.filename);		//C:\Users\Yoosang\Desktop\Study\Nodejs\require.js
+```
+
+require가 반드시 파일 최상단에 위치할 필요 X
+
+module.exports도 최하단에 위치할 필요 X
+
+한번 require한 파일은 require.cache에 저장되므로 다음에 require할 때는 require.cache에 있는 것이 재사용
+
+__모듈로 순환 참조(circular dependency)가 있을 경우 순환 참조되는 대상을 빈 객체로 만듦__
+
+__dep1.js => dep2.js__
+
+__dep2.js => dep1.js__
+
+__dep-run.js__
+
+```javascript
+const dep1 = require('./dep1');
+const dep2 = require('./dep2');
+dep1();
+dep2();
+```
+
+__결과__
+
+```
+$ node dep-run
+require dep1 {}
+require dep2 [Function (anonymous)]
+dep2 [Function (anonymous)]
+dep1 {}
+(node:29044) Warning: Accessing non-existent property 'Symbol(nodejs.util.inspect.custom)' of module exports inside circular dependency (Use `node --trace-warnings ...` to show where the warning was created)
+```
+
+#### process
+
+현재 실행되고 있는 노드 프로세스에 대한 정보를 담음.
+
+##### process.env
+
+REPL에 process.env입력시 시스템의 환경 변수 출력
+
+환경 변수는 노드에 직접 영향 ex)UV_THREADPOOL_SIZE, NODE_OPTIONS
+
+- __NODE_OPTION=--max-old-space-size=8192__: 노드의 메모리를 8GB까지 사용할 수 있게 함
+- __UV_THREADPOOL_SIZE=8__: 스레드풀의 스레드 개수 조절
+
+process.env는 서비스의 중요한 키를 저장하기도 함
+
+```
+const secretId = process.env.SECRET_ID;
+const secretCode = process.env.SECRET_CODE;
+```
+
+##### process.nextTick(콜백)
+
+이벤트 루프가 다른 콜백 함수들보다 nextTick의 콜백함수를 우선 처리
+
+```javascript
+setImmediate(() => {
+  console.log('immediate');
+});
+process.nextTick(() => {
+  console.log('nextTick');
+});
+setTimeout(() => {
+  console.log('timeout');
+}, 0);
+Promise.resolve().then(() => console.log('promise'));
+```
+
+```
+$ node nextTick
+nextTick
+promise
+timeout
+immediate
+```
+
+resolve된 promise도 다른 콜백들보다 우선시됨
+
+process.nextTick과 Promise를 마이크로태스크(microtask)라고 따로 구분
+
+```
+$ node nextTick
+nextTick
+promise
+timeout
+immediate
+```
+
+<img src="https://thebook.io/img/080229/111.jpg" width="60%">
+
+__*마이크로태스크의 재귀호출__
+
+​	process.nextTick으로 받은 콜백 함수나 resolve된 promise는 다른 콜백 함수보다 먼저 실행.
+
+​	그래서 비동기 처리를 할 때 setImmediate보다 process.nextTick을 더 선호하는 개발자도 있음.
+
+​	이런 마이크로태스크를 재귀 호출하면 이벤트 루프는 다른 콜백 함수보다 마이크로태스크를 우선하여 처리하므로 콜백 함수들이 실행되지 않을 수 있음.
+
+##### process.exit(코드)
+
+실행 중인 노드 프로세스를 종료
+
+서버 환경에서 이 함수 사용시 서버가 멈추므로 잘 사용하지 않음
+
+```javascript
+let i = 1;
+setInterval(() => {
+  if (i === 5) {
+    console.log('종료!');
+    process.exit();
+  }
+  console.log(i);
+  i += 1;
+}, 1000);
+```
+
+1~4까지 표시한 뒤, i가 5가 되면 종료
+
+process.exit 메서드는 인수를 주지 않거나 0을 주면 정상 종료, 1을 주면 비정상 종료

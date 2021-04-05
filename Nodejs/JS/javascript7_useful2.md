@@ -234,4 +234,66 @@ console.log(one);
 console.log(rest);
 ```
 
-이 때 one은 
+원하는 값을 밖으로 꺼내고, 나머지 값을 rest 안에 넣음
+
+### 함수 파라미터에서의 rest
+
+```javascript
+function sum(...rest) {
+  return rest.reduce((acc, current) => acc + current, 0);
+}
+
+const result = sum(1, 2, 3, 4, 5, 6);
+console.log(result); // 21
+```
+
+함수의 파라미터가 몇 개가 될 지 모를 때 유용
+
+```javascript
+function sum(...rest) {
+  return rest.reduce((acc, current) => acc + current, 0);
+}
+
+const numbers = [1, 2, 3, 4, 5, 6];
+const result = sum(...numbers);
+console.log(result);
+```
+
+위처럼 함수 인자에 spread를 사용 가능
+
+## Scope
+
+scope란 변수 혹은 함수를 선언하게 될 때 해당 변수 또는 함수가 유요한 범위를 의미
+
+- **Global Scope**: 코드의 모든 범위에서 사용 가능
+- **Function Scope**: 함수 안에서만 사용 가능
+- **Block Scope**: if, for, switch 등 특정 블록 내부에서만 사용이 가능
+
+### Hoisting
+
+자바스크립트에서 아직 선언되지 않은 함수/변수를 "끌어올려서" 사용할 수 있는 자바스크립트의 작동 방식
+
+```javascript
+myFunction();
+
+function myFunction() {
+  console.log('hello world!');
+}
+```
+
+`myFunction`함수를 선언하기 전에 `myFunction()`을 호출
+
+자바스크립트 엔진은 다음과 같이 받아들임
+
+```javascript
+function myFunction() {
+  console.log('hello world!');
+}
+
+myFunction();
+```
+
+**Hoisting이 발생하는 코드는 이해하기 어려우며 유지보수도 힘듦으로 방지해야함**
+
+**`var`대신 `const`,`let`을 위주로 사용하기**
+
