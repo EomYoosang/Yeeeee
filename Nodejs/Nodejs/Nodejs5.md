@@ -195,3 +195,14 @@ http.createServer(async (req, res) => {
   });
 ```
 
+req.method로 HTTP 요청 메서드 구분
+
+GET일 경우 주소를 확인하여 파일 제공
+
+POST /user 요청에서는 사용자를 새로 저장
+
+PUT / user/아이디 요청에서는 해당 아이디의 사용자 데이터를 수정
+
+DELETE /user/아이디 요청에서는 해당 아이디의 사용자 데이터를 제거
+
+req.on('data')와 req.on('end')은 요처으이 본문에 들어있는 데이터를 꺼내기 위한 작업
