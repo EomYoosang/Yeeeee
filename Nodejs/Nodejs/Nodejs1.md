@@ -62,7 +62,7 @@ C, C++로 구현
 
 ex) 클릭 이벤트 리스너에 경고창 콜백 함수, 클릭 => 경고창
 
-이벤트가 없거나 에빈트를 다 처리하면 대기
+이벤트가 없거나 이벤트를 다 처리하면 대기
 
 <img src="https://thebook.io/img/080229/027_2.jpg" width="60%">
 
@@ -91,11 +91,11 @@ console.log('끝');
 
 위 코드의 실행 과정은 다음과 같음
 
-<img src="https://thebook.io/img/080229/030.jpg" width="30%">
+<img src="https://thebook.io/img/080229/030.jpg" width="70%">
 
-<img src="https://thebook.io/img/080229/031_1.jpg" width="30%">
+<img src="https://thebook.io/img/080229/031_1.jpg" width="70%">
 
-<img src="https://thebook.io/img/080229/031_2.jpg" width="30%">
+<img src="https://thebook.io/img/080229/031_2.jpg" width="70%">
 
 1. anonymous, setTimeout()순으로 호출 스택에 들어감.
 
