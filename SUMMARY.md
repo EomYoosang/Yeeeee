@@ -17,4 +17,6 @@
    * [NodeJs핵심개념4](Nodejs/Nodejs/Nodejs4.md)
    * [NodeJs핵심개념5](Nodejs/Nodejs/Nodejs5.md)
    * [NodeJs핵심개념6](Nodejs/Nodejs/Nodejs6.md)
+* [React]
+    * [Redux - Redux란?](React/Redux1.md)
 

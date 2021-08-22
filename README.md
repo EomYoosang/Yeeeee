@@ -8,3 +8,5 @@
 
 GitHub: [https://github.com/EomYoosang](https://github.com/EomYoosang)  
 GitBook: [https://dbtkd1801.gitbook.io/yeeeee/](https://dbtkd1801.gitbook.io/yeeeee/)
+
+Instagram: @yeeeeeeys
