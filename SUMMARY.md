@@ -19,3 +19,4 @@
    * [NodeJs핵심개념6](Nodejs/Nodejs/Nodejs6.md)
 * [Spring](Spring/Intro.md)
    * [Spring 프로젝트 생성](Spring/Spring1.md)
+   * [Spring View 설정](Spring/Spring2.md)
