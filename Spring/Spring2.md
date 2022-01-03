@@ -60,3 +60,7 @@ public class HelloController {
 
 동작 방식은 아래와 같다.  
 <img alt="스프링 동작방식" src="./springboot-thymeleaf.png" style="width=100%;"/>
+
+### 참고
+`spring-boot-devtools`라이브러리를 추가하면 `html`파일을 컴파일만 해주면 서버 재시작 없이 View파일 변경이 가능하다.  
+스크립트 언어는 소스코드 변경도 적용해주었는데 컴파일언어는 그게 안되니 불편하다...
