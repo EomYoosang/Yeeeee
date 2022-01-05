@@ -22,4 +22,6 @@
    * [Spring View 설정](Spring/Spring2.md)
    * [Spring 빌드&실행](Spring/Spring3.md)
    * [Spring 웹 개발 기초](Spring/Spring4.md)
-   * [Spring 회원 관리 예제](Spring/Spring5.md)
+   * [Spring 회원 관리 예제1](Spring/Spring5.md)
+   * [Spring 회원 관리 예제2](Spring/Spring6.md)
+   * [Spring 회원 관리 예제3](Spring/Spring7.md)
