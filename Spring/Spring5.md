@@ -166,7 +166,11 @@ import java.util.Optional;
 
 public class MemberService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     // 회원가입
     public Long join(Member member) {
@@ -193,9 +197,102 @@ public class MemberService {
         return memberRepository.findById(memberId);
     }
 }
+
 ```
 
 ### 회원 서비스 테스트 케이스 생성
-회원 리포지토리 테스트 케이스를 생성할 때는 직접 만들어줬지만 단축키를 사용하면 편하다.
-`cmd + shift + t`
+회원 리포지토리 테스트 케이스를 생성할 때는 직접 만들어줬지만 단축키를 사용하면 편하다.  
+`cmd + shift + t`  
 <img alt="서비스테스트" src="serviceTest.png" style="width:80%" />
+
+```java:MemberServiceTest.java
+package eys.hellospring.service;
+
+import eys.hellospring.domain.Member;
+import eys.hellospring.repository.MemoryMemberRepository;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class MemberServiceTest {
+
+    MemberService memberService;
+    MemoryMemberRepository memberRepository;
+
+    @BeforeEach
+    public void beforeEach() {
+        memberRepository = new MemoryMemberRepository();
+        memberService = new MemberService(memberRepository);
+    }
+
+    @AfterEach
+    public void afterEach() {
+        memberRepository.clearStore();
+    }
+
+    @Test
+    void 회원가입() {
+        // given
+        Member member = new Member();
+        member.setName("spring");
+
+        // when
+        Long saveId = memberService.join(member);
+
+        // then
+        Member findMember = memberService.findOne(saveId).get();
+        assertThat(member.getName()).isEqualTo(findMember.getName());
+    }
+    @Test
+    public void 중복_회원_예외() {
+        // given
+        Member member1 = new Member();
+        member1.setName("spring");
+
+        Member member2 = new Member();
+        member2.setName("spring");
+
+        // when
+        memberService.join(member1);
+        IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+
+        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+
+
+//        try{
+//            memberService.join(member2);
+//            fail();
+//        } catch (IllegalStateException e){
+//            assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+//        }
+
+        // then
+    }
+    @Test
+    void findMembers() {
+    }
+
+    @Test
+    void findOne() {
+    }
+}
+```
+
+### Dependency Injection
+MemberService 클래스의 constructor에서 memberRepository를 파라미터로 받는 이유는?  
+MemberServiceTest에서 각 테스트를 실행할 때마다 memberService가 생성되면 비용(메모리, 시간)이 발생하기 때문  
+MemberService가 memberRepository에 의존  
+#### DI의 장점
+**1. 의존성이 줄어든다.**  
+어떤 객체가 다른 객체에 의존하게 되면 의존대상의 변화에 취약해져 의존대상이 변화되면 의존하는 객체 또한 변화해야 한다.  
+DI로 구현하면 주입받는 대상이 변하더라도 구현을 수정할 일이 줄어든다.  
+**2. 재사용성이 높아진다.**  
+기존에 MemberService에서만 사용되는 MemberRepository를 다른 클래스에서도 사용할 수 있다.  
+**3. 테스트가 용이해진다.**  
+MemberService와 MemberRepository를 분리해서 테스트할 수 있다.  
+**4. 가독성이 높아진다.**  
+클래스 기능들을 분리하여 가독성이 늘어난다.
