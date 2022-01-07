@@ -9,8 +9,9 @@
 ### 정적 컨텐츠
 - 스프링 부트 정적 컨텐츠 기능  
 - src/resoureces/static 폴더의 html파일 제공  
-http://localhost:8080/static.html => static.html을 보냄  
-<img alt="static" src="static.png" style="width:80%"/>  
+http://localhost:8080/static.html => static.html을 보냄   
+
+<img alt="static" src="static.png" style="width:80%" />  
 
 ### MVC와 템플릿 엔진
 - MVC: Model, View, Controller
