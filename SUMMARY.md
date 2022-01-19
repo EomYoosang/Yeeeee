@@ -32,7 +32,8 @@
 
 * [Spring 실전 활용]()
    * [Spring 환경 설정](SpringPractice/SpringPractice1.md)
+   * [Spring 도메인 분석 설계](SpringPractice/SpringPractice2.md)
 
-* [알고리즘]
+* [알고리즘]()
    * [배열](Algorithm/Algorithm1.md)
    * [연결리스트](Algorithm/Algorithm2.md)

@@ -71,3 +71,49 @@
 > **참고: 외래 키가 있는 곳을 연관관계의 주인으로.**  
 연관관계의 주인은 비즈니스 상의 우위가 아닌 외래 키를 누가 관리하는지에 따라 결정. 
   
+
+### 엔티티 클래스 개발
+- 예제에서는 설명을 쉽게하기 위해 엔티티 클래스에 Getter, Setter를 모두 열고, 단순하게 설계
+- 실무에서는 가급적 Setter는 꼭 필요한 경우에만 사용
+
+> 참고: 이론적으로 Getter, Setter 모두 제공하지 않고, 꼭 필요한 별도의 메서드를 제공하는 것이 이상적. 실무에서는 엔티티의 데이터를 조회할 일이 많으므로 Getter는 모두 열어두는 것이 편리하다. 
+
+**회원 엔티티**  
+```java
+@Entity
+@Getter
+@Setter
+public class Member {
+
+    @Id @GeneratedValue
+    @Column(name = "member_id")
+    private Long id;
+
+    private String username;
+
+    @Embedded
+    private Address address;
+
+    @OneToMany
+    private List<Order> orders = new ArrayList<>();
+}
+
+```
+> 참고: 엔티티의 식별자는 `id`를 사용하고 PK 컬럼 명은 `member_id`를 사용. 엔티티는 타입이 있으므로 `id`필드 만으로 쉽게 구불할 수 있고, 테이블은 타입이 없어 쉽게 구분할 수 없으므로 테이블 명으로 id를 명시. `테이블 명`+`_id`또는 `테이블명`+`Id`를 사용. 둘 중 어느 것을 사용해도 상관 없으나 일관성이 중요!
+**주문 엔티티**  
+```java
+@Entity
+@Table(name = "orders")
+@Getter @Setter
+public class Order {
+
+    @Id @GeneratedValue
+    @Column(name = "order_id")
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+}
+```
+위의 주문과 회원의 연관관계의 주인은 fk를 갖고있는 주문 쪽.
