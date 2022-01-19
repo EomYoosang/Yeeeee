@@ -32,3 +32,7 @@
 
 * [Spring 실전 활용]()
    * [Spring 환경 설정](SpringPractice/SpringPractice1.md)
+
+* [알고리즘]
+   * [배열](Algorithm/Algorithm1.md)
+   * [연결리스트](Algorithm/Algorithm2.md)
