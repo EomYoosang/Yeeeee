@@ -35,3 +35,7 @@
 * [알고리즘]()
    * [배열](Algorithm/Algorithm1.md)
    * [연결리스트](Algorithm/Algorithm2.md)
+   * [스택](Algorithm/Algorithm3.md)
+   * [큐](Algorithm/Algorithm4.md)
+   * [덱](Algorithm/Algorithm5.md)
+   * [스택 활용](Algorithm/Algorithm6.md)
